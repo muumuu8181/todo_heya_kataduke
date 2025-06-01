@@ -1,0 +1,296 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: none; /* 最大幅をなくして親要素（body）いっぱいに広がるように */
+    width: 100%;
+    /* display: flex; */ /* 子要素を縦に並べるためflexboxは削除 */
+    /* flex-wrap: wrap; */
+    /* gap: 20px; */
+}
+
+/* メインタイトルは削除された */
+/* h1 { ... } */
+
+#task-area,
+#achievement-area,
+#completion-message {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#current-task {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+#complete-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#complete-button:hover {
+    background-color: #4cae4c;
+}
+
+#achievement-area h2 {
+    color: #f0ad4e; /* Orange for achievement */
+}
+
+#completion-message h2 {
+    color: #337ab7; /* Blue for completion */
+}
+
+#areas-visual {
+    /* display: flex; */ /* コンテナがflexなので不要 */
+    /* flex-wrap: wrap; */ /* コンテナがflexなので不要 */
+    /* gap: 5px; */ /* エリア間の隙間を小さく */
+    /* justify-content: center; */ /* 中央寄せ */
+    /* margin-bottom: 20px; */ /* 横並びになるため不要 */
+    display: flex; /* エリアを横並びにする */
+    flex-wrap: wrap; /* 画面幅に合わせて折り返す */
+    gap: 10px; /* エリア間の隙間 */
+    justify-content: center; /* 中央寄せ */
+    margin-bottom: 10px; /* タスク追加フォームとの隙間を削減 */
+    /* flex: none; */ /* 看板ボードの幅を優先させる */
+    /* width: 120px; */ /* エリア表示用の固定幅 */
+    /* padding: 10px; */
+    /* border: 1px solid #eee; */
+    /* border-radius: 8px; */
+    /* background-color: #f9f9f9; */
+}
+
+.area {
+    width: 150px; /* 幅をさらに横長に (1.5倍) */
+    height: 30px; /* 高さを小さく維持 */
+    margin: 0; /* flexコンテナのgapで隙間を調整 */
+    border: 2px solid #337ab7; /* 枠線 */
+    border-radius: 5px; /* 角丸 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #333;
+    background-color: #e7f3ff; /* 薄い青の背景 */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.9em; /* 文字サイズ調整 */
+}
+
+.area.completed {
+    border-color: #5cb85c; /* 完了したら緑の枠線 */
+    background-color: #d9ead3; /* 完了したら薄い緑の背景 */
+    color: #333; /* 文字色はそのままか調整 */
+}
+
+/* タスク一覧表示関連のスタイルは新しい看板スタイルに置き換え */
+/*
+#tasks-list-container {
+    margin-top: 30px;
+    text-align: left; 
+}
+
+.area-section {
+    margin-bottom: 25px;
+}
+
+.area-section h2 {
+    color: #337ab7;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #337ab7;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.task-item {
+    background-color: #e7f3ff;
+    border: 1px solid #b3d4ff;
+    padding: 12px; 
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.task-item:hover {
+    background-color: #d0e9ff;
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.task-item.completed-task {
+    background-color: #d9ead3;
+    border-color: #5cb85c;
+    opacity: 0.7;
+    text-decoration: line-through;
+    color: #555;
+}
+*/
+
+#kanban-board {
+    display: flex; /* 列を横並びにする */
+    gap: 20px; /* 列間の隙間 */
+    margin-top: 10px; /* 上の要素との隙間を削減 */
+    overflow-x: auto; /* 列が多い場合にスクロール可能に */
+    padding-bottom: 10px; /* スクロールバーの見た目調整 */
+    flex-grow: 1; /* 利用可能なスペースを埋める */
+}
+
+.kanban-column {
+    flex: 1; /* 利用可能な幅を均等に分割 */
+    min-width: 250px; /* 列の最小幅 */
+    background-color: #e9e9eb; /* 列の背景色 */
+    padding: 15px;
+    border-radius: 8px;
+    display: flex; /* h2とtask-listを縦並び */
+    flex-direction: column;
+    min-height: 900px; /* 看板列の最小高さをさらに増やす (1.5倍) */
+}
+
+.kanban-column h2 {
+    text-align: center; /* 列の見出し中央寄せ */
+    color: #555; /* 見出しの色 */
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ccc;
+}
+
+.task-list {
+    flex-grow: 1; /* タスクリストが列の高さいっぱいになるように */
+    min-height: 50px; /* タスクがない場合の最小高さ（ドラッグ＆ドロップの受け皿に必要） */
+}
+
+.task-card {
+    background-color: #fff; /* タスクカードの背景色 */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px; /* カード間の隙間 */
+    border-radius: 5px;
+    cursor: grab; /* ドラッグ可能なカーソル */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+    background-color: #f9f9f9;
+}
+
+.task-card.dragging {
+    opacity: 0.5; /* ドラッグ中のカードを薄く */
+    transform: rotate(2deg); /* 少し回転させる（任意） */
+}
+
+/* 完了状態のタスクカードのスタイル（必要であれば） */
+.task-card.task-done {
+    background-color: #d9ead3; /* 完了したら薄い緑の背景 */
+    border-color: #5cb85c; /* 完了したら緑の枠線 */
+    text-decoration: line-through;
+    color: #555;
+}
+
+/* エリアグループの見出しスタイル */
+.area-group-heading {
+    font-size: 1em; /* 見出しのサイズ */
+    margin-top: 15px; /* 上の要素との隙間 */
+    margin-bottom: 5px; /* 下の要素との隙間 */
+    padding-bottom: 3px;
+    border-bottom: 1px solid #ccc; /* 区切り線 */
+    color: #555; /* 見出しの色 */
+}
+
+/* エリア別タスクリストのスタイル */
+.area-task-list {
+    margin-bottom: 15px; /* 次のエリアグループとの隙間 */
+}
+
+#add-task-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+#add-task-form h2 {
+    color: #333;
+    margin: 0;
+    padding: 0 10px 8px 0;
+    white-space: nowrap;
+}
+
+#new-task-text {
+    width: 40%;
+    flex-grow: 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#area-checkboxes {
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.9em;
+}
+
+#area-checkboxes label {
+    margin: 0;
+    cursor: pointer;
+}
+
+#add-task-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff; /* 青系のボタン */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-task-button:hover {
+    background-color: #0056b3;
+}
+
+/* 未分類列のスタイル */
+#column-uncategorized h2 {
+    color: #6c757d; /* グレー系の見出し色 */
+    border-bottom-color: #6c757d;
+} 

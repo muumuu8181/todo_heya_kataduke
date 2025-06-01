@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部屋片付けモチベUPアプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <div id="areas-visual" style="margin-bottom: 20px;">
+            <!-- 各片付けエリアの視覚的な表現（ここは引き続き使用） -->
+            <div class="area" id="area-entrance">玄関</div>
+            <div class="area" id="area-hallway">廊下</div>
+            <div class="area" id="area-washroom">洗面所</div>
+            <div class="area" id="area-toilet">トイレ</div>
+            <div class="area" id="area-bath">風呂</div>
+            <div class="area" id="area-living-kitchen">LDK (キッチン)</div>
+            <div class="area" id="area-living-other">LDK (その他)</div>
+            <!-- 必要に応じて他のエリアを追加 -->
+        </div>
+
+        <div id="add-task-form">
+            <h2>新しいタスクを追加</h2>
+            <input type="text" id="new-task-text" placeholder="タスク内容を入力">
+            <div id="area-checkboxes">
+                <!-- エリア選択チェックボックスがJavaScriptでここに生成されます -->
+            </div>
+            <button id="add-task-button">タスク追加</button>
+        </div>
+        
+        <div id="kanban-board">
+             <div class="kanban-column" id="column-uncategorized">
+                 <h2>未着手</h2>
+                 <div class="task-list" id="task-list-uncategorized">
+                     <!-- UncategorizedタスクがJavaScriptでここに生成されます -->
+                 </div>
+             </div>
+
+            <div class="kanban-column" id="column-todo">
+                <h2>着手</h2>
+                <div class="task-list" id="task-list-todo">
+                    <!-- ToDoタスクがJavaScriptでここに生成されます -->
+                </div>
+            </div>
+            
+            <div class="kanban-column" id="column-in-progress">
+                <h2>作業中</h2>
+                <div class="task-list" id="task-list-in-progress">
+                    <!-- In ProgressタスクがJavaScriptでここに生成されます -->
+                </div>
+            </div>
+
+            <div class="kanban-column" id="column-done">
+                <h2>完了</h2>
+                <div class="task-list" id="task-list-done">
+                    <!-- DoneタスクがJavaScriptでここに生成されます -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 以前の達成メッセージと完了メッセージエリアは残し、JSで制御 -->
+        <div id="achievement-area" style="display: none;">
+            <h2>おめでとう！</h2>
+            <p>タスクを達成しました！</p>
+            <!-- 達成感を高める視覚的な要素をここに追加 -->
+        </div>
+
+        <div id="completion-message" style="display: none;">
+            <h2>素晴らしい！</h2>
+            <p>今日のタスクは全て完了です！</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
